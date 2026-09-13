@@ -11,4 +11,4 @@ project(iniparser VERSION 0.1 LANGUAGES CXX)
 add_subdirectory(utils)
 
 add_executable(iniparser main.cpp)
-target_link_libraries(iniparser PRIVATE iniparser_utils)
+target_link_libraries(iniparser PRIVATE iniparserutils)

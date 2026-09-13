@@ -1,6 +1,6 @@
 #pragma once
-#ifndef INIPARSER_TRIM_H
-#define INIPARSER_TRIM_H
+#ifndef INIPARSER_UTILS_TRIM_H
+#define INIPARSER_UTILS_TRIM_H
 
 #include <string_view> // std::string_view
 
@@ -13,4 +13,4 @@ std::string_view trim(const std::string_view sv,
 
 } // namespace iniparser::utils::string
 
-#endif // INIPARSER_TRIM_H
+#endif // INIPARSER_UTILS_TRIM_H

@@ -1,12 +1,23 @@
-#include "split.h"
-#include "trim.h"
+#include "iniparser.h"
+#include "testkit.h"
 
-#include <iostream> // std::cout
+void testBasicParsing() {
+    TEST_CASE("Basic parsing");
+    const char *ini = R"ini(
+key1 = value1
+key2 = value2
+[Section1]
+key3 = value3
+)ini";
 
-int main() {
-    using namespace iniparser::utils::string;
-    auto result = split("Hello=World!", '=');
-    for (const auto &s : result) {
-        std::cout << s << '\n';
-    }
+    IniParser parser;
+    bool ok = parser.parse(ini);
+
+    ASSERT_TRUE(ok, "Parse should successed");
+    ASSERT_EQ(parser.get("", "key1").value_or(""), "value1", "Top-level key1");
+    ASSERT_EQ(parser.get("", "key2").value_or(""), "value2", "Top-level key2");
+    ASSERT_EQ(parser.get("Section1", "key3").value_or(""), "value3",
+              "Section1 key3");
 }
+
+int main() { testBasicParsing(); }

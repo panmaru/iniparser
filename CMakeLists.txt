@@ -9,6 +9,12 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 project(iniparser VERSION 0.1 LANGUAGES CXX)
 
 add_subdirectory(utils)
+add_subdirectory(parser)
+add_subdirectory(test)
 
-add_executable(iniparser main.cpp)
-target_link_libraries(iniparser PRIVATE iniparserutils)
+add_executable(main main.cpp)
+target_link_libraries(main PRIVATE
+	iniparserutils
+	parser
+	testkit
+)

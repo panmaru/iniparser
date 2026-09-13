@@ -1,6 +1,9 @@
 add_library(parser STATIC
 	iniparser.cpp
 )
+target_link_libraries(parser PRIVATE
+	iniparserutils
+)
 
 target_include_directories(parser PUBLIC
 	${CMAKE_CURRENT_SOURCE_DIR}

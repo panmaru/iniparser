@@ -11,7 +11,7 @@ inline int testsFailed = 0;
 
 } // namespace iniparser::testkit
 
-#define TEST_CASE(name) std::cout << "=== " << (name) << " ===" << std::endl
+#define TEST_CASE(name) std::cout << "\n=== " << (name) << " ===" << std::endl
 
 #define ASSERT_EQ(actual, expected, message)                                   \
     do {                                                                       \

@@ -2,7 +2,7 @@
 #include "testkit.h"
 
 void testBasicParsing() {
-    TEST_CASE("Basic parsing");
+    TEST_CASE("Basic Parsing");
     const char *ini = R"ini(
 key1 = value1
 key2 = value2
@@ -20,4 +20,31 @@ key3 = value3
               "Section1 key3");
 }
 
-int main() { testBasicParsing(); }
+void testComment() {
+    TEST_CASE("Comment Handling");
+    const char *ini = R"ini(
+; semicolon comment
+# hash comment
+key1 = value1 ; inline comment
+key2 = value2 # inline hash comment
+key3 = "value3;with;semicolons" ; this is a comment
+key4 = "value4#with#hash" ; comment
+)ini";
+
+    IniParser parser;
+    bool ok = parser.parse(ini);
+    ASSERT_TRUE(ok, "Parse should successed");
+    ASSERT_EQ(parser.get("", "key1").value_or(""), "value1",
+              "Value before inline semicolon comment");
+    ASSERT_EQ(parser.get("", "key2").value_or(""), "value2",
+              "Value before inline hash comment");
+    ASSERT_EQ(parser.get("", "key3").value_or(""), "value3;with;semicolons",
+              "Value with semicolons");
+    ASSERT_EQ(parser.get("", "key4").value_or(""), "value4#with#hash",
+              "Value with hash");
+}
+
+int main() {
+    testBasicParsing();
+    testComment();
+}

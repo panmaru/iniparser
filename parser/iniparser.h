@@ -16,11 +16,9 @@ public:
 private:
     using ini_section_t = std::unordered_map<std::string, std::string>;
 
-    bool consumeLine(const std::string_view line, std::string &currentSection);
-    bool consumeSection(const std::string_view line,
-                        std::string &currentSection);
-    bool consumeKeyValue(const std::string_view line,
-                         std::string &currentSection);
+    bool consumeLine(std::string_view line, std::string &currentSection);
+    bool consumeSection(std::string_view line, std::string &currentSection);
+    bool consumeKeyValue(std::string_view line, std::string &currentSection);
 
     std::unordered_map<std::string, // section name
                        ini_section_t>

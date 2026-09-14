@@ -381,8 +381,8 @@ int main() {
     testSections();
     testQuotedValues();
     testEscapeSequences();
-    // testWhitespaceHandling();
-    // testEmptyValues();
+    testWhitespaceHandling();
+    testEmptyValues();
     // testMultilineAndContinuation();
     // testEdgeCases();
     // testInvalidSyntax();

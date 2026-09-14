@@ -155,13 +155,13 @@ bool IniParser::consumeKeyValue(std::string_view line,
     using iniparser::utils::string::trimQuote;
 
     auto [key, value] = splitKeyValue(line);
-    if (key.empty() || value.empty()) {
+    if (key.empty()) {
         return false;
     }
 
     if (isQuoted(value)) {
         value = trimQuote(value);
-        auto unescapedValue = unescape(value);
+        std::string unescapedValue = unescape(value);
         m_data_.at(currentSection).emplace(key, unescapedValue);
     } else {
         m_data_.at(currentSection).emplace(key, value);

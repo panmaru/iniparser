@@ -237,9 +237,8 @@ void testInvalidSyntax() {
     {
         const char *ini = "invalidline\nkey=value";
         IniParser parser;
-        parser.parse(ini);
-        ASSERT_EQ(parser.get("", "key").value_or(""), "value",
-                  "Valid line after invalid");
+        bool ok = parser.parse(ini);
+        ASSERT_TRUE(!ok, "Missing equals should not parse");
     }
 }
 
@@ -376,6 +375,10 @@ key3 = val3
 }
 
 int main() {
+    std::cout << "========================================" << std::endl;
+    std::cout << "   INI Parser Comprehensive Test Suite" << std::endl;
+    std::cout << "========================================" << std::endl;
+
     testBasicParsing();
     testComment();
     testSections();
@@ -383,11 +386,29 @@ int main() {
     testEscapeSequences();
     testWhitespaceHandling();
     testEmptyValues();
-    // testMultilineAndContinuation();
-    // testEdgeCases();
-    // testInvalidSyntax();
-    // testSpecialCharacters();
-    // testSectionOrdering();
-    // testComplexRealWorldExample();
-    // testDataIteration();
+    testMultilineAndContinuation();
+    testEdgeCases();
+    testInvalidSyntax();
+    testSpecialCharacters();
+    testSectionOrdering();
+    testComplexRealWorldExample();
+    testDataIteration();
+
+    std::cout << "\n========================================" << std::endl;
+    std::cout << "Test Results:" << std::endl;
+    std::cout << "  Passed: " << iniparser::testkit::testsPassed << std::endl;
+    std::cout << "  Failed: " << iniparser::testkit::testsFailed << std::endl;
+    std::cout << "  Total:  "
+              << (iniparser::testkit::testsPassed +
+                  iniparser::testkit::testsFailed)
+              << std::endl;
+    std::cout << "========================================" << std::endl;
+
+    if (iniparser::testkit::testsFailed == 0) {
+        std::cout << "\nAll tests passed!" << std::endl;
+        return 0;
+    } else {
+        std::cout << "\nSome tests failed!" << std::endl;
+        return 1;
+    }
 }

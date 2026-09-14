@@ -14,6 +14,7 @@ public:
     bool parse(const std::string_view &sv);
     std::optional<std::string> get(const std::string &section,
                                    const std::string &key);
+    bool has(const std::string &section, const std::string &key);
     std::unordered_map<std::string, ini_section_t> data();
 
 private:

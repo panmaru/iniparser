@@ -11,9 +11,3 @@ project(iniparser VERSION 0.1 LANGUAGES CXX)
 add_subdirectory(utils)
 add_subdirectory(parser)
 add_subdirectory(test)
-
-add_executable(main main.cpp)
-target_link_libraries(main PRIVATE
-	parser
-	testkit
-)

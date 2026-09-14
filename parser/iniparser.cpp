@@ -109,6 +109,20 @@ std::optional<std::string> IniParser::get(const std::string &section,
     return keyItr->second;
 }
 
+bool IniParser::has(const std::string &section, const std::string &key) {
+    auto secItr = m_data_.find(section);
+    if (secItr == m_data_.end()) {
+        return false;
+    }
+
+    auto keyItr = secItr->second.find(key);
+    if (keyItr == secItr->second.end()) {
+        return false;
+    }
+
+    return true;
+}
+
 std::unordered_map<std::string, IniParser::ini_section_t> IniParser::data() {
     return m_data_;
 }

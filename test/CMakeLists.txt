@@ -1,7 +1,5 @@
-add_library(testkit INTERFACE
-	testkit.h
-)
+add_executable(iniparsertest test.cpp)
 
-target_include_directories(testkit INTERFACE
-	${CMAKE_CURRENT_SOURCE_DIR}
+target_link_libraries(iniparsertest PRIVATE
+    parser
 )

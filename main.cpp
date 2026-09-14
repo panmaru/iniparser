@@ -44,7 +44,34 @@ key4 = "value4#with#hash" ; comment
               "Value with hash");
 }
 
+void testSections() {
+    TEST_CASE("Section Handling");
+
+    const char *ini = R"ini(
+toplevel = top
+[section1]
+key1 = val1
+[section2]
+key2 = val2
+[section3]
+key3 = val3
+)ini";
+
+    IniParser parser;
+    bool ok = parser.parse(ini);
+    ASSERT_TRUE(ok, "Parse should successed");
+    ASSERT_EQ(parser.get("", "toplevel").value_or(""), "top",
+              "Top-level key toplevel");
+    ASSERT_EQ(parser.get("section1", "key1").value_or(""), "val1",
+              "Section1 key1");
+    ASSERT_EQ(parser.get("section2", "key2").value_or(""), "val2",
+              "Section2 key2");
+    ASSERT_EQ(parser.get("section3", "key3").value_or(""), "val3",
+              "Section3 key3");
+}
+
 int main() {
     testBasicParsing();
     testComment();
+    testSections();
 }

@@ -8,14 +8,15 @@
 
 class IniParser {
 public:
+    using ini_section_t = std::unordered_map<std::string, std::string>;
+
     void clear();
     bool parse(const std::string_view &sv);
     std::optional<std::string> get(const std::string &section,
                                    const std::string &key);
+    std::unordered_map<std::string, ini_section_t> data();
 
 private:
-    using ini_section_t = std::unordered_map<std::string, std::string>;
-
     bool consumeLine(std::string_view line, std::string &currentSection);
     bool consumeSection(std::string_view line, std::string &currentSection);
     bool consumeKeyValue(std::string_view line, std::string &currentSection);

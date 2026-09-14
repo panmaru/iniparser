@@ -10,6 +10,9 @@ namespace iniparser::utils::string {
 std::vector<std::string_view> split(const std::string_view sv,
                                     const char delim);
 
+std::pair<std::string_view, std::string_view>
+splitKeyValue(std::string_view line);
+
 } // namespace iniparser::utils::string
 
 #endif // INIPARSER_UTILS_SPLIT_H
